@@ -12,6 +12,10 @@ public class Main {
         // main method to be called that starts the entire game
     }
 
+    public static void quit(){
+        // main method to be called that quits the game
+    }
+
     public static float getgr(){
         return this.gr_h;
     }
