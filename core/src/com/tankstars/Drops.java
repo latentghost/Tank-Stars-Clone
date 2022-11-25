@@ -4,12 +4,16 @@ import com.badlogic.gdx.graphics.Texture;
 public class Drops {
 
     Texture img;
-    float x;
-    float y;
-    int health = 10;
+    private float x;
+    private float y;
+    private int health;
 
-    public void falling(float x, float y){
+    public void fall(float x, float y){
 
+    }
+
+    public void starttime(){
+        
     }
 
 }
