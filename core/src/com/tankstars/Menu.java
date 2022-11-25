@@ -1,6 +1,6 @@
 package com.tankstars;
 
-public abstract class Menu {
+public class Menu {
     
     private float width;
     private float height;
