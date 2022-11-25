@@ -9,6 +9,10 @@ public class Main {
     private static PauseMenu pmenu;
     private static QuitMenu qmenu;
     private static SaveMenu smenu;
+    private static MainScreenButton vscom;
+    private static MainScreenButton vsfr;
+    private static MainScreenButton load;
+    private static MainScreenButton quit;
 
 
     public static void play(){
@@ -44,7 +48,7 @@ public class Main {
     }
 
     public static void quitToMenu(){
-        
+
     }
 
 }
