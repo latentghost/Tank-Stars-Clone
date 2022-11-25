@@ -2,8 +2,8 @@ package com.tankstars;
 
 public class MainScreenButton implements Buttons {
     
-    private float width;
-    private float height;
+    private const float width;
+    private const float height;
     private float pos_x;
     private float pos_y;
 
