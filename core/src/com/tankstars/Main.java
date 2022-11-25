@@ -6,6 +6,9 @@ public class Main {
     private static Player p2;
     private static Drops drop;
     private static final float gr_h;
+    private static PauseMenu pmenu;
+    private static QuitMenu qmenu;
+    private static SaveMenu smenu;
 
 
     public static void play(){
@@ -32,6 +35,16 @@ public class Main {
 
     }
 
+    public static void pause(){
 
+    }
+
+    public static void save(){
+
+    }
+
+    public static void quitToMenu(){
+        
+    }
 
 }
