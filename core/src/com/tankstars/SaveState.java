@@ -33,21 +33,16 @@ public class SaveState implements Screen {
 
         game.batch.draw(img,0,0,1920,1080);
 
-        int g = 867;
-        int i = 397;
-
         int j = 867;
-        int k = 765;
+        int k = 397;
 
-        int height = 336;
-        int width = 185;
-
-        if (( (Gdx.input.getX() > g && Gdx.input.getX() < (g + width) ) && (Gdx.input.getY() > i && Gdx.input.getY() < (i + height) ) )){
+        if (( (Gdx.input.getX() > j && Gdx.input.getX() < (j + WIDTH) ) && (Gdx.input.getY() > k && Gdx.input.getY() < (k + HEIGHT )))) {
             if (Gdx.input.isTouched()) {
                 this.dispose();
                 game.setScreen(new com.tankstars.screens.MainScreen(game));
             }
         }
+
         game.batch.end();
     }
 
