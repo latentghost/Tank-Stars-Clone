@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Creately</title>
+        <base href="/d/">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="google" content="notranslate">
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"> 
+
+        <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
+        <script type="text/javascript" charset="utf-8" src="https://auth.creately.com/js/gravity-3.1.1.js"></script>
+        <script type="text/javascript">
+            /**
+             * Transportation layer in Socket cluster requires global to be defined.
+             * Their library has a bug reported as it is not setting the global variable
+             * by default. Hence adding it over here.
+             */
+            var global = global || window;
+        </script>
+        <script type="text/javascript">
+            /**
+             * Zone.js patches requestAnimationFrame which will add an overhead to rendering.
+             * By setting this before loading zone.js, patching can be disabled for rAF.
+             * Reference: https://github.com/angular/zone.js/blob/master/MODULE.md
+             */
+            __Zone_disable_requestAnimationFrame = true;
+        </script>
+            <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-us.js"></script>
+            <script type="text/javascript">
+                ;(function(p,l,o,w,i,n,g){if(!p[i]){p.GlobalSnowplowNamespace = p.GlobalSnowplowNamespace || [];
+                p.GlobalSnowplowNamespace.push(i);p[i]=function(){(p[i].q = p[i].q || []).push(arguments)
+                };p[i].q=p[i].q||[];n=l.createElement(o);g=l.getElementsByTagName(o)[0];n.async=1;
+                n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","https://creately.com/static/js/creately-analytics-2.7.2.js","snowplow"));
+                window.snowplowschema='iglu:com.creately/creately_app_events/jsonschema/1-0-0';
+                window.snowplow('newTracker', 'cf', 'evts.creately.com', {
+                    appId: 'nucleus',
+                    cookieDomain: '*.creately.com',
+                    contexts: {
+                        webPage: true,
+                        performanceTiming: true,
+                        gaCookies: true,
+                        geolocation: false
+                    }
+                });
+            </script>
+
+            <!-- Google Analytics -->
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-5454460-1', 'auto');
+                ga('send', 'pageview');
+            </script>
+            <!-- End Google Analytics -->
+
+
+            <script type="text/javascript">
+                (function(e,t){var n=e.amplitude||{_q:[],_iq:{}};var r=t.createElement("script")
+                ;r.type="text/javascript";r.async=true
+                ;r.src="https://cdn.amplitude.com/libs/amplitude-4.4.0-min.gz.js"
+                ;r.onload=function(){if(e.amplitude.runQueuedFunctions){
+                e.amplitude.runQueuedFunctions()}else{
+                console.log("[Amplitude] Error: could not load SDK")}}
+                ;var i=t.getElementsByTagName("script")[0];i.parentNode.insertBefore(r,i)
+                ;function s(e,t){e.prototype[t]=function(){
+                this._q.push([t].concat(Array.prototype.slice.call(arguments,0)));return this}}
+                var o=function(){this._q=[];return this}
+                ;var a=["add","append","clearAll","prepend","set","setOnce","unset"]
+                ;for(var u=0;u<a.length;u++){s(o,a[u])}n.Identify=o;var c=function(){this._q=[]
+                ;return this}
+                ;var l=["setProductId","setQuantity","setPrice","setRevenueType","setEventProperties"]
+                ;for(var p=0;p<l.length;p++){s(c,l[p])}n.Revenue=c
+                ;var d=["init","logEvent","logRevenue","setUserId","setUserProperties","setOptOut","setVersionName","setDomain","setDeviceId","setGlobalUserProperties","identify","clearUserProperties","setGroup","logRevenueV2","regenerateDeviceId","logEventWithTimestamp","logEventWithGroups","setSessionId","resetSessionId"]
+                ;function v(e){function t(t){e[t]=function(){
+                e._q.push([t].concat(Array.prototype.slice.call(arguments,0)))}}
+                for(var n=0;n<d.length;n++){t(d[n])}}v(n);n.getInstance=function(e){
+                e=(!e||e.length===0?"$default_instance":e).toLowerCase()
+                ;if(!n._iq.hasOwnProperty(e)){n._iq[e]={_q:[]};v(n._iq[e])}return n._iq[e]}
+                ;e.amplitude=n})(window,document);
+
+                amplitude.getInstance().init("3c83710c4e8d0432e916a96de1813ea7");
+            </script>
+
+            <script type="text/javascript">
+                (function (apiKey) {
+                    var ind = document.createElement('script');
+                    ind.src = 'https://cdn.indicative.com/js/1.0.2/Indicative.min.js';
+                    ind.type = 'text/javascript';
+                    ind.async = 'true';
+                    var ind_init = false;
+                    ind.onload = ind.onreadystatechange = function () {
+                        var rs = this.readyState;
+                        if (ind_init || (rs && rs != 'complete' && rs != 'loaded')) return;
+                        ind_init = true;
+                        Indicative.initialize(apiKey, {
+                            recordSessions: true,
+                            sessionsThreshold: 30,
+                            cookiesOnMainDomain: true
+                        });
+                    };
+                    var s = document.getElementsByTagName('script')[0];
+                    s.parentNode.insertBefore(ind, s);
+                })("80878c5f-acba-46e0-8137-2eefec0f64bd");
+            </script>
+
+            <!-- Start of creately Zendesk Widget script -->
+            <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=46cacf06-b92d-41e6-b33b-e32a92299d31"></script>
+            <script type="text/javascript">
+                zE('webWidget', 'hide');
+                zE('webWidget:on', 'close', () => {
+                    zE('webWidget', 'hide')
+                });
+                zE('webWidget:on', 'open', () => {
+                    // Hide Zendesk Logo from the Live Chat
+                    setTimeout(function(){
+                        var ifEles = document.getElementsByTagName("iframe");
+                        for (var x=0; x < ifEles.length; x++) {
+                            if (ifEles[x].id === "webWidget") {
+                                var zdDoc = ifEles[x].contentWindow ? ifEles[x].contentWindow.document : ifEles[x].contentDocument;
+                                var els = zdDoc.querySelectorAll("a.sc-1slnzzg-0.kkUEer");
+                                if (els.length == 1) {
+                                    els[0].style.visibility="hidden";
+                                }
+                            }
+                        };
+                    }, 500);
+                });
+            </script>
+            <!-- End of creately Zendesk Widget script -->
+
+            <script type="text/javascript">
+                (function () {
+                    window.sib = {
+                        equeue: [],
+                        client_key: "frquwtfct2n4yih85oc0yzsk"
+                    };
+                    window.sendinblue = {};
+                    for (var j = ['track', 'identify', 'trackLink', 'page'], i = 0; i < j.length; i++) {
+                        (function (k) {
+                            window.sendinblue[k] = function () {
+                                var arg = Array.prototype.slice.call(arguments);
+                                (window.sib[k] || function () {
+                                    var t = {};
+                                    t[k] = arg;
+                                    window.sib.equeue.push(t);
+                                })(arg[0], arg[1], arg[2]);
+                            };
+                        })(j[i]);
+                    }
+                    var n = document.createElement("script"),
+                        i = document.getElementsByTagName("script")[0];
+                    n.type = "text/javascript", n.id = "sendinblue-js", n.async = !0, n.src = "https://sibautomation.com/sa.js?key=" + window.sib.client_key, i.parentNode.insertBefore(n, i), window.sendinblue.page();
+                })();
+            </script>
+    <link rel="stylesheet" href="/d/styles.a978f823904f2aa1a60e.css"></head>
+    <body>
+        <div id="auth-ui"></div>
+        <app-root></app-root>
+    <script src="/d/runtime.03df792f2523ab624939.js" defer></script><script src="/d/polyfills-es5.7fccf5ebaff55fd44726.js" nomodule defer></script><script src="/d/polyfills.128283b1a368873a1d81.js" defer></script><script src="/d/main.7bae73227dbe6c3a0734.js" defer></script></body>
+</html>
