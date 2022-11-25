@@ -34,32 +34,62 @@ public class PausedArena implements Screen {
         game.batch.begin();
         game.batch.draw(img,0,0,1920,1080);
         int a = 834;
-        int b = 624;
+        int b = 384;
 
         int c = 834;
-        int d = 744;
+        int d = 504;
 
         int e = 834;
-        int f = 504;
+        int f = 624;
+
+        int g = 867;
+        int h = 397;
+
+        int height = 276;
+        int width = 185;
+
+        int i = 765;
+
+        int j = 834;
+        int k = 744;
 
         if (( (Gdx.input.getX() > a && Gdx.input.getX() < (a + WIDTH) ) && (Gdx.input.getY() > b && Gdx.input.getY() < (b + HEIGHT) ) )) {
             if (Gdx.input.isTouched()) {
                 this.dispose();
-                game.setScreen(new com.tankstars.screens.ChooseTankAbramsP1(game));
+                game.setScreen(new com.tankstars.screens.Arena(game));
             }
         }
         else if (( (Gdx.input.getX() > c && Gdx.input.getX() < (c + WIDTH) ) && (Gdx.input.getY() > d && Gdx.input.getY() < (d + HEIGHT) ) )) {
             if (Gdx.input.isTouched()) {
-                this.dispose();
-                game.setScreen(new com.tankstars.screens.Start(game));
+                img = new Texture("Arena - Pause - Select.jpg");
+                game.batch.draw(img,0,0,1920,1080);
+                if (( (Gdx.input.getX() > g && Gdx.input.getX() < (g + width) ) && (Gdx.input.getY() > h && Gdx.input.getY() < (h + height) ) )){
+                    if (Gdx.input.isTouched()) {
+                        this.dispose();
+                        game.setScreen(new com.tankstars.screens.MainScreen(game));
+                    }
+                }
+                else if (( (Gdx.input.getX() > g && Gdx.input.getX() < (g + width) ) && (Gdx.input.getY() > i && Gdx.input.getY() < (i + height) ) )){
+                    if (Gdx.input.isTouched()) {
+                        this.dispose();
+                        game.setScreen(new com.tankstars.screens.PausedArena(game));
+                    }
+                }
             }
         }
         else if (( (Gdx.input.getX() > e && Gdx.input.getX() < (e + WIDTH) ) && (Gdx.input.getY() > f && Gdx.input.getY() < (f + HEIGHT) ) )) {
             if (Gdx.input.isTouched()) {
                 this.dispose();
-                game.setScreen(new com.tankstars.screens.Start(game));
+                game.setScreen(new com.tankstars.screens.ChooseTankAbramsP1(game));
             }
         }
+        else if (( (Gdx.input.getX() > j && Gdx.input.getX() < (j + WIDTH) ) && (Gdx.input.getY() > k && Gdx.input.getY() < (k + HEIGHT) ) )) {
+            if (Gdx.input.isTouched()) {
+                this.dispose();
+                game.setScreen(new com.tankstars.screens.MainScreen(game));
+            }
+        }
+
         game.batch.end();
     }
 
