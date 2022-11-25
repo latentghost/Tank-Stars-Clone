@@ -37,6 +37,10 @@ public class LoadGame implements Screen {
         int x = 1496;
         int y = 335;
 
+        int yy = 474;
+        int yyy = 613;
+        int yyyy = 752;
+
         int a = 1386;
         int b = 32;
 
@@ -47,14 +51,44 @@ public class LoadGame implements Screen {
                 game.setScreen(new MainScreen(game));
             }
         }
-        else if ( (Gdx.input.getX() > x && Gdx.input.getX() < (x + WIDTH) ) && (Tankstars.height - Gdx.input.getY() > y && Tankstars.height - Gdx.input.getY() < (y + HEIGHT) ) ) {
+        else if ( (Gdx.input.getX() > x && Gdx.input.getX() < (x + WIDTH) ) && (Gdx.input.getY() > y && Gdx.input.getY() < (y + HEIGHT) ) ) {
+            img = new Texture("Load Game Hover 1.jpg");
+            game.batch.draw(img,0,0,1920,1080);
             if (Gdx.input.isTouched()) {
                 this.dispose();
                 resize(1920,1080 );
-                game.setScreen(new MainScreen(game));
+                game.setScreen(new Arena(game));
+            }
+        }
+        else if ( (Gdx.input.getX() > x && Gdx.input.getX() < (x + WIDTH) ) && (Gdx.input.getY() > yy && Gdx.input.getY() < (yy + HEIGHT) ) ) {
+            img = new Texture("Load Game Hover 2.jpg");
+            game.batch.draw(img,0,0,1920,1080);
+            if (Gdx.input.isTouched()) {
+                this.dispose();
+                resize(1920,1080 );
+                game.setScreen(new Arena(game));
+            }
+        }
+        else if ( (Gdx.input.getX() > x && Gdx.input.getX() < (x + WIDTH) ) && (Gdx.input.getY() > yyy && Gdx.input.getY() < (yyy + HEIGHT) ) ) {
+            img = new Texture("Load Game Hover 3.jpg");
+            game.batch.draw(img,0,0,1920,1080);
+            if (Gdx.input.isTouched()) {
+                this.dispose();
+                resize(1920,1080 );
+                game.setScreen(new Arena(game));
+            }
+        }
+        else if ( (Gdx.input.getX() > x && Gdx.input.getX() < (x + WIDTH) ) && (Gdx.input.getY() > yyyy && Gdx.input.getY() < (yyyy + HEIGHT) ) ) {
+            img = new Texture("Load Game Hover 4.jpg");
+            game.batch.draw(img,0,0,1920,1080);
+            if (Gdx.input.isTouched()) {
+                this.dispose();
+                resize(1920,1080 );
+                game.setScreen(new Arena(game));
             }
         }
         else{
+            img = new Texture("Load Game.jpg");
             game.batch.draw(img, 0,0,1920,1080);
         }
         game.batch.end();
