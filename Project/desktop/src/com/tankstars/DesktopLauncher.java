@@ -9,9 +9,9 @@ public class DesktopLauncher {
 //	}
 	public static void main (String[] arg) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
-		config.setWindowedMode(1920, 1080);
+		config.setWindowedMode(1280, 720);
 		config.setResizable(false);
-		config.setForegroundFPS(60);
+		config.setForegroundFPS(30);
 		config.setTitle("Tankstars");
 		new Lwjgl3Application(new Tankstars(), config);
 	}

@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.tankstars.Tankstars;
 
 public class Start implements Screen {
-    Tankstars game;
+    public static Tankstars game;
     Texture img;
     private float elapsed;
 
@@ -15,18 +15,12 @@ public class Start implements Screen {
 
     @Override
     public void show() {
-        img = new Texture("Startup.jpg");
+        img = new Texture("Home Screen Render.jpg");
     }
 
     @Override
     public void render(float delta) {
-        elapsed += delta;
-        game.batch.begin();
-        game.batch.draw(img, 0 , 0, 1920, 1080);
-        game.batch.end();
-        if (elapsed > 1.0) {
-            game.setScreen(new MainScreen(game));
-        }
+        game.setScreen(new MainScreen(game));
     }
 
     @Override

@@ -4,8 +4,8 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class MainScreenButton implements Buttons {
 
-    private final float WIDTH = 336f;
-    private final float HEIGHT = 107f;
+    private final float WIDTH = 336f/1920*1280;
+    private final float HEIGHT = 150f/1080*720;
     private String t;
     public Texture app;
 

@@ -9,6 +9,10 @@ public class Player {
     private int health;
 
 
+    public Player(int ty){
+        this.type = ty;
+    }
+
     public Tank getTank() {
         return t;
     }
@@ -23,6 +27,10 @@ public class Player {
 
     public int getHealth() {
         return health;
+    }
+
+    public void setTank(Tank tank){
+        this.t = tank;
     }
 
     public void move(){
