@@ -9,7 +9,7 @@ public class Player {
     private int health;
 
 
-    public Tank getT() {
+    public Tank getTank() {
         return t;
     }
 

@@ -24,7 +24,7 @@ public class Start implements Screen {
         game.batch.begin();
         game.batch.draw(img, 0 , 0, 1920, 1080);
         game.batch.end();
-        if (elapsed > 2.0) {
+        if (elapsed > 1.0) {
             game.setScreen(new MainScreen(game));
         }
     }
