@@ -7,7 +7,7 @@ import com.tankstars.Tankstars;
 
 public class MainScreen implements Screen {
 
-    protected static Tankstars game;
+    public static Tankstars game;
     protected static Texture img;
 
     private static final int WIDTH = 336;

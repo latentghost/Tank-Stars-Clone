@@ -26,7 +26,6 @@ public class ChooseTankP2 implements Screen {
 
     @Override
     public void show() {
-        img = new Texture("Choose Tank - P2 - 1.png");
     }
 
     @Override
