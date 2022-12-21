@@ -242,7 +242,7 @@ public class Main extends MainScreen {
         String cname = name[ChooseTankP1.ind];
         Texture ts = new Texture("Choose Tank.png");
         Texture p = new Texture("p1.png");
-        MainScreenButton sel = new MainScreenButton();
+        MainScreenButton sel = new MainScreenButton(1468f*xm,212*ym);
         sel.text("Select");
 
         game.batch.draw(img,0,0,1280,720);
@@ -307,7 +307,7 @@ public class Main extends MainScreen {
         String cname = name[ChooseTankP2.ind];
         Texture ts = new Texture("Choose Tank.png");
         Texture p = new Texture("p2.png");
-        MainScreenButton sel = new MainScreenButton();
+        MainScreenButton sel = new MainScreenButton(1468f*xm,212*ym);
         sel.text("Select");
 
         game.batch.draw(img,0,0,1280,720);
