@@ -1,5 +1,7 @@
 package com.tankstars;
 
+import com.tankstars.screens.ChooseTankP1;
+
 public class PauseMenu extends Menu {
 
     private static PauseMenu menu = null;
@@ -46,7 +48,14 @@ public class PauseMenu extends Menu {
     }
 
     public void newgame(){
-
+        Main.setPaused(0);
+        Main.setSaving(0);
+        Main.setFd(0);
+        Main.setCt(0);
+        Main.setRedhel(0);
+        Main.game.getScreen().dispose();
+        Main.game.resize(1280,720);
+        Main.game.setScreen(new ChooseTankP1(Main.game));
     }
 
     public void quit(){

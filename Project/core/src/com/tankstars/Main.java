@@ -4,6 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.tankstars.screens.*;
 
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+
 public class Main extends MainScreen {
     private static Player p1;
     private static Player p2;
@@ -39,12 +42,12 @@ public class Main extends MainScreen {
     public Main(Tankstars game){
         super(game);
         vscom = new MainScreenButton(1468f*xm,746f*ym);
-        vsfr = new MainScreenButton(1468f*xm,400f*ym);
-        load = new MainScreenButton(1468f*xm,227f*ym);
-        quit = new MainScreenButton(1468f*xm,573f*ym);
-        l1 = new MainScreenButton(1468f*xm,400f*ym);
-        l2 = new MainScreenButton(1468f*xm,227f*ym);
-        l3 = new MainScreenButton(1468f*xm,573f*ym);
+        load = new MainScreenButton(1468f*xm,400f*ym);
+        quit = new MainScreenButton(1468f*xm,227f*ym);
+        vsfr = new MainScreenButton(1468f*xm,573f*ym);
+        l2 = new MainScreenButton(1468f*xm,400f*ym);
+        l3 = new MainScreenButton(1468f*xm,227f*ym);
+        l1 = new MainScreenButton(1468f*xm,573f*ym);
         this.play();
     }
 
@@ -94,9 +97,11 @@ public class Main extends MainScreen {
         float z = 400f*ym;
         float a = 227f*ym;
 
-        game.batch.draw(l1.app,x,z,l1.getWIDTH(),l1.getHEIGHT());
-        game.batch.draw(l2.app,x,a,l2.getWIDTH(),l2.getHEIGHT());
-        game.batch.draw(l3.app,x,b,l3.getWIDTH(),l3.getHEIGHT());
+        Texture text = new Texture("Load Game Render.png");
+        game.batch.draw(text,x,746f*ym,l1.getWIDTH(),l1.getHEIGHT()-30*ym);
+        game.batch.draw(l1.app,x,b,l1.getWIDTH(),l1.getHEIGHT());
+        game.batch.draw(l2.app,x,z,l2.getWIDTH(),l2.getHEIGHT());
+        game.batch.draw(l3.app,x,a,l3.getWIDTH(),l3.getHEIGHT());
 
         if (l1.isClicked()) {
             l1.hover();
@@ -135,7 +140,132 @@ public class Main extends MainScreen {
             game.batch.draw(l3.app,x,a,l3.getWIDTH(),l3.getHEIGHT());
         }
 
+        float bx = 1386f*xm;
+        float by = 979f*ym;
+        float bw = 69f/1920*1080;
+        Texture back = new Texture("Back Button.png");
+        game.batch.draw(back,bx,by,bw,bw);
 
+        if(Gdx.input.getX()>bx && Gdx.input.getX()<bx+bw && Gdx.input.getY()<720-by && Gdx.input.getY()>(720-by-bw)){
+            if(Gdx.input.isTouched()) {
+                game.getScreen().dispose();
+                game.resize(1280, 720);
+                game.setScreen(new MainScreen(game));
+            }
+        }
+
+        Texture t2 = new Texture("Frame 7.png");
+        Texture t3 = new Texture("Frame 8.png");
+        Texture t4 = new Texture("Frame 9.png");
+
+        game.batch.draw(t2,1491*xm,608*ym+20*ym,290*xm,38*ym);
+        game.batch.draw(t3,1487*xm,435*ym+20*ym,299*xm,38*ym);
+        game.batch.draw(t4,1494*xm,261*ym+20*ym,285*xm,38*ym);
+
+        ObjectInputStream in = null;
+        FileInputStream pl = null;
+        FileInputStream tank = null;
+        FileInputStream bul = null;
+
+        if(l1.isClicked() && Gdx.input.isTouched()){
+            try{
+                pl = new FileInputStream("player1.txt");
+                in = new ObjectInputStream(pl);
+                p1 = (Player) in.readObject();
+                tank = new FileInputStream("tank1.txt");
+                in = new ObjectInputStream(tank);
+                p1.setTank((Tank) in.readObject());
+                bul = new FileInputStream("bullet1.txt");
+                in = new ObjectInputStream(bul);
+                p1.getTank().setBul((Bullet) in.readObject());
+                pl = new FileInputStream("player2.txt");
+                in = new ObjectInputStream(pl);
+                p2 = (Player) in.readObject();
+                tank = new FileInputStream("tank2.txt");
+                in = new ObjectInputStream(tank);
+                p2.setTank((Tank) in.readObject());
+                bul = new FileInputStream("bullet2.txt");
+                in = new ObjectInputStream(bul);
+                p2.getTank().setBul((Bullet) in.readObject());
+            }
+            catch (Exception e){;}
+            finally {
+                try{
+                    in.close();
+                }
+                catch (Exception e){;}
+            }
+
+            game.getScreen().dispose();
+            game.resize(1280,720);
+            game.setScreen(new Arena(game));
+        }
+        else if(l2.isClicked() && Gdx.input.isTouched()){
+            try{
+                pl = new FileInputStream("player1.txt");
+                in = new ObjectInputStream(pl);
+                p1 = (Player) in.readObject();
+                tank = new FileInputStream("tank1.txt");
+                in = new ObjectInputStream(tank);
+                p1.setTank((Tank) in.readObject());
+                bul = new FileInputStream("bullet1.txt");
+                in = new ObjectInputStream(bul);
+                p1.getTank().setBul((Bullet) in.readObject());
+                pl = new FileInputStream("player2.txt");
+                in = new ObjectInputStream(pl);
+                p2 = (Player) in.readObject();
+                tank = new FileInputStream("tank2.txt");
+                in = new ObjectInputStream(tank);
+                p2.setTank((Tank) in.readObject());
+                bul = new FileInputStream("bullet2.txt");
+                in = new ObjectInputStream(bul);
+                p2.getTank().setBul((Bullet) in.readObject());
+            }
+            catch (Exception e){;}
+            finally {
+                try{
+                    in.close();
+                }
+                catch (Exception e){;}
+            }
+
+            game.getScreen().dispose();
+            game.resize(1280,720);
+            game.setScreen(new Arena(game));
+        }
+        else if(l3.isClicked() && Gdx.input.isTouched()){
+            try{
+                pl = new FileInputStream("player1.txt");
+                in = new ObjectInputStream(pl);
+                p1 = (Player) in.readObject();
+                tank = new FileInputStream("tank1.txt");
+                in = new ObjectInputStream(tank);
+                p1.setTank((Tank) in.readObject());
+                bul = new FileInputStream("bullet1.txt");
+                in = new ObjectInputStream(bul);
+                p1.getTank().setBul((Bullet) in.readObject());
+                pl = new FileInputStream("player2.txt");
+                in = new ObjectInputStream(pl);
+                p2 = (Player) in.readObject();
+                tank = new FileInputStream("tank2.txt");
+                in = new ObjectInputStream(tank);
+                p2.setTank((Tank) in.readObject());
+                bul = new FileInputStream("bullet2.txt");
+                in = new ObjectInputStream(bul);
+                p2.getTank().setBul((Bullet) in.readObject());
+            }
+            catch (Exception e){;}
+            finally {
+                try{
+                    in.close();
+                }
+                catch (Exception e){;}
+            }
+
+            game.getScreen().dispose();
+            game.resize(1280,720);
+            game.setScreen(new Arena(game));
+        }
 
         game.batch.end();
     }
@@ -157,9 +287,9 @@ public class Main extends MainScreen {
         float a = 227f*ym;
 
         game.batch.draw(vscom.app,x,y,vscom.getWIDTH(),vscom.getHEIGHT());
-        game.batch.draw(vsfr.app,x,z,vsfr.getWIDTH(),vsfr.getHEIGHT());
-        game.batch.draw(load.app,x,a,load.getWIDTH(),load.getHEIGHT());
-        game.batch.draw(quit.app,x,b,quit.getWIDTH(),quit.getHEIGHT());
+        game.batch.draw(vsfr.app,x,b,vsfr.getWIDTH(),vsfr.getHEIGHT());
+        game.batch.draw(load.app,x,z,load.getWIDTH(),load.getHEIGHT());
+        game.batch.draw(quit.app,x,a,quit.getWIDTH(),quit.getHEIGHT());
 
         if (vscom.isClicked()) {
             vscom.hover();
@@ -210,19 +340,15 @@ public class Main extends MainScreen {
             game.batch.draw(quit.app,x,a,quit.getWIDTH(),quit.getHEIGHT());
         }
 
-        float bx = 1386f*xm;
-        float by = 979f*ym;
-        float bw = 69f/1920*1080;
-        Texture back = new Texture("Back Button.png");
-        game.batch.draw(back,bx,by,bw,bw);
+        Texture t1 = new Texture("Frame 3.png");
+        Texture t2 = new Texture("Frame 4.png");
+        Texture t3 = new Texture("Frame 5.png");
+        Texture t4 = new Texture("Frame 6.png");
 
-        if(Gdx.input.getX()>bx && Gdx.input.getX()<bx+bw && Gdx.input.getY()<720-by && Gdx.input.getY()>(720-by-bw)){
-            if(Gdx.input.isTouched()) {
-                game.getScreen().dispose();
-                game.resize(1280, 720);
-                game.setScreen(new MainScreen(game));
-            }
-        }
+        game.batch.draw(t1,1500*xm,781*ym+20*ym,280*xm,38*ym);
+        game.batch.draw(t2,1491*xm,608*ym+20*ym,290*xm,38*ym);
+        game.batch.draw(t3,1487*xm,435*ym+20*ym,299*xm,38*ym);
+        game.batch.draw(t4,1494*xm,261*ym+20*ym,285*xm,38*ym);
 
         game.batch.end();
     }
@@ -236,10 +362,10 @@ public class Main extends MainScreen {
         float bw = 69f/1920*1080;
 
         Texture[] tanks = new Texture[]{new Texture("Abrams Choose.png"), new Texture("Mark 1 Choose.png"), new Texture("Coalition Choose.png")};
-        String[] name = new String[]{"Abrams","Mark - I","Coalition"};
+        Texture[] name = new Texture[]{new Texture("Frame 10.png"),new Texture("Frame 11.png"),new Texture("Frame 12.png")};
         Texture back = new Texture("Back Button.png");
         Texture curr = tanks[ChooseTankP1.ind];
-        String cname = name[ChooseTankP1.ind];
+        Texture cname = name[ChooseTankP1.ind];
         Texture ts = new Texture("Choose Tank.png");
         Texture p = new Texture("p1.png");
         MainScreenButton sel = new MainScreenButton(1468f*xm,212*ym);
@@ -251,6 +377,7 @@ public class Main extends MainScreen {
         game.batch.draw(p,1565f*xm,711f*ym,143f*xm,72f*ym);
         game.batch.draw(sel.app,1468f*xm,212*ym,sel.getWIDTH(),sel.getHEIGHT());
         game.batch.draw(curr,339f*xm,224f*ym,674*xm,432*ym);
+        game.batch.draw(cname,534*xm,888*ym,285*xm,38*ym);
 
         if(Gdx.input.getX()>bx && Gdx.input.getX()<bx+bw && Gdx.input.getY()<720-by && Gdx.input.getY()>(720-by-bw)){
             if(Gdx.input.isTouched()) {
@@ -289,6 +416,10 @@ public class Main extends MainScreen {
                 if(ChooseTankP1.ind>2) ChooseTankP1.ind -= 3;
             }
         }
+
+        Texture sl = new Texture("Frame 21.png");
+        game.batch.draw(sl,1494*xm,266*ym,285*xm,38*ym);
+
         game.batch.end();
 
     }
@@ -301,10 +432,10 @@ public class Main extends MainScreen {
         float by = 979f*ym;
         float bw = 69f/1920*1080;
         Texture[] tanks = new Texture[]{new Texture("Abrams Choose.png"), new Texture("Mark 1 Choose.png"), new Texture("Coalition Choose.png")};
-        String[] name = new String[]{"Abrams","Mark - I","Coalition"};
+        Texture[] name = new Texture[]{new Texture("Frame 10.png"),new Texture("Frame 11.png"),new Texture("Frame 12.png")};
         Texture back = new Texture("Back Button.png");
         Texture curr = tanks[ChooseTankP2.ind];
-        String cname = name[ChooseTankP2.ind];
+        Texture cname = name[ChooseTankP2.ind];
         Texture ts = new Texture("Choose Tank.png");
         Texture p = new Texture("p2.png");
         MainScreenButton sel = new MainScreenButton(1468f*xm,212*ym);
@@ -316,6 +447,7 @@ public class Main extends MainScreen {
         game.batch.draw(p,1565f*xm,711f*ym,143f*xm,72f*ym);
         game.batch.draw(sel.app,1468f*xm,212*ym,sel.getWIDTH(),sel.getHEIGHT());
         game.batch.draw(curr,339f*xm,224f*ym,674*xm,432*ym);
+        game.batch.draw(cname,534*xm,888*ym,285*xm,38*ym);
 
         if(Gdx.input.getX()>bx && Gdx.input.getX()<bx+bw && Gdx.input.getY()<720-by && Gdx.input.getY()>(720-by-bw)){
             if(Gdx.input.isTouched()) {
@@ -357,6 +489,10 @@ public class Main extends MainScreen {
                 if(ChooseTankP2.ind>2) ChooseTankP2.ind -= 3;
             }
         }
+
+        Texture sl = new Texture("Frame 22.png");
+        game.batch.draw(sl,1494*xm,266*ym,265*xm,38*ym);
+
         game.batch.end();
 
     }
@@ -533,6 +669,16 @@ public class Main extends MainScreen {
         game.batch.draw(pbut,pmenu.getRes().getPos_x(),pmenu.getNewg().getPos_y(),pmenu.getRes().getWIDTH(),pmenu.getRes().getHEIGHT());
         game.batch.draw(pbut,pmenu.getRes().getPos_x(),pmenu.getQuit().getPos_y(),pmenu.getRes().getWIDTH(),pmenu.getRes().getHEIGHT());
 
+        Texture  f1 = new Texture("Frame 13.png");
+        Texture  f2 = new Texture("Frame 14.png");
+        Texture  f3 = new Texture("Frame 15.png");
+        Texture  f4 = new Texture("Frame 16.png");
+
+        game.batch.draw(f1,870*xm,646*ym,213*xm,28*ym);
+        game.batch.draw(f2,870*xm,526*ym,213*xm,28*ym);
+        game.batch.draw(f3,870*xm,406*ym,213*xm,28*ym);
+        game.batch.draw(f4,870*xm,286*ym,213*xm,28*ym);
+
         if(pmenu.getRes().isClicked()) pmenu.resume();
         else if(pmenu.getNewg().isClicked()) pmenu.newgame();
         else if(pmenu.getSave().isClicked()) pmenu.savestate();
@@ -542,6 +688,7 @@ public class Main extends MainScreen {
     public static void savegame(){
         smenu = SaveMenu.getmenu();
         saving = 1;
+        drawsave();
     }
 
     public static void drawsave(){

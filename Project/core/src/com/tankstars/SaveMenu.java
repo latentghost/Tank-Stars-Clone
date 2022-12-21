@@ -1,5 +1,7 @@
 package com.tankstars;
 
+import com.tankstars.screens.MainScreen;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
@@ -48,17 +50,41 @@ public class SaveMenu extends Menu {
         FileOutputStream bul = null;
 
         try{
-            pl = new FileOutputStream("player.txt");
-            tank = new FileOutputStream("tank.txt");
-            bul = new FileOutputStream("bullet.txt");
+            pl = new FileOutputStream("player1.txt");
+            tank = new FileOutputStream("tank1.txt");
+            bul = new FileOutputStream("bullet1.txt");
             out = new ObjectOutputStream(pl);
             out.writeObject(Main.getp1());
             out = new ObjectOutputStream(tank);
             out.writeObject(Main.getp1().getTank());
             out = new ObjectOutputStream(bul);
             out.writeObject(Main.getp1().getTank().getBul());
+            pl = new FileOutputStream("player2.txt");
+            tank = new FileOutputStream("tank2.txt");
+            bul = new FileOutputStream("bullet2.txt");
+            out = new ObjectOutputStream(pl);
+            out.writeObject(Main.getp2());
+            out = new ObjectOutputStream(tank);
+            out.writeObject(Main.getp2().getTank());
+            out = new ObjectOutputStream(bul);
+            out.writeObject(Main.getp2().getTank().getBul());
         }
         catch (Exception e){;}
+        finally {
+            try{
+                out.close();
+            }
+            catch (Exception e){;}
+        }
+
+        Main.setPaused(0);
+        Main.setSaving(0);
+        Main.setFd(0);
+        Main.setCt(0);
+        Main.setRedhel(0);
+        Main.game.getScreen().dispose();
+        Main.game.resize(1280,720);
+        Main.game.setScreen(new MainScreen(Main.game));
     }
 
     public void cancel(){
