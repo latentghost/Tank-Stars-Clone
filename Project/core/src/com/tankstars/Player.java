@@ -16,6 +16,7 @@ public class Player implements Serializable {
 
     private float mx;
     private float my;
+    private double comp;
 
 
     public Player(int ty, int tank){
@@ -71,29 +72,43 @@ public class Player implements Serializable {
     }
 
     public void currturn(){
-        if(Gdx.input.isKeyPressed(Input.Keys.W)){
-            this.t.setAngle(Math.min(60,this.t.getangle()+1));
+        if(type!=0){
+            if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+                this.t.setAngle(Math.min(60, this.t.getangle() + 1));
+            } else if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+                this.t.setAngle((Math.max(0, this.t.getangle() - 1)));
+            }
         }
-        else if(Gdx.input.isKeyPressed(Input.Keys.S)){
-            this.t.setAngle((Math.max(0,this.t.getangle()-1)));
-        }
+        int m = type;
+        if(m==0) m=1;
         Texture gola = new Texture("Gola.png");
         float x = 0f;
-        if(type==1) x = this.t.getx()+140*Main.xm;
+        if(type==1 || type==0) x = this.t.getx()+140*Main.xm;
         else if(type==-1) x = this.t.getx() - 15*Main.xm;
-        for(int i=0; i<15; i++){
-            Main.game.batch.draw(gola,x + 30*i*type*Main.xm,this.t.gety() + 60*Main.ym + golaeqn(i),9*Main.xm,9*Main.ym);
+        for(int i=0; i<10; i++){
+            Main.game.batch.draw(gola,x + 30*i*m*Main.xm,this.t.gety() + 60*Main.ym + golaeqn(i),9*Main.xm,9*Main.ym);
         }
         this.move();
+        if(this.fuel<50 && this.type==0) {
+            this.getTank().setBul(new Bullet(this.getTank().gettype(),this.getType()));
+            this.setbul();
+            Main.shoot();
+        }
     }
 
     public void move(){
-        if(this.fuel>0){
+        if(this.type==0 && this.fuel>50){
+            if(this.fuel==100) comp = Math.random()-0.5;
+            if(comp<=0) this.t.moveright();
+            else this.t.moveright();
+            this.fuel -= 1;
+        }
+        else if(this.fuel>0){
             if(Gdx.input.getX()>216*Main.xm && Gdx.input.getX()<285*Main.xm && Gdx.input.getY()<720-106.06*Main.ym && Gdx.input.getY()>720-183*Main.ym) {
                 if (Gdx.input.isTouched()) {
                     this.mx = 223f;
                     this.fuel -= 1;
-                    this.getTank().moveleft(this.type);
+                    this.getTank().moveleft();
                 }
                 else this.mx = 290.05f;
             }
@@ -101,7 +116,7 @@ public class Player implements Serializable {
                 if(Gdx.input.isTouched()){
                     this.mx = 359f;
                     this.fuel -= 1;
-                    this.getTank().moveright(this.type);
+                    this.getTank().moveright();
                 }
                 else this.mx = 290.05f;
             }

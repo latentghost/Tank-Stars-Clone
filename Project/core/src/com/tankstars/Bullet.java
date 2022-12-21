@@ -54,10 +54,10 @@ public class Bullet {
     public int impact(){
         Texture exp = new Texture("Explosion.png");
         Main.game.batch.draw(exp,this.pos_x-50*Main.xm,Main.getgr(),283*Main.xm,122*Main.ym);
-        if(Math.abs(this.pos_x-Main.getp1().getTank().getx())<200){
+        if(Math.abs(this.pos_x-Main.getp1().getTank().getx())<100){
             Main.setRedhel(15);
         }
-        else if(Math.abs(this.pos_x-Main.getp2().getTank().getx())<200){
+        else if(Math.abs(this.pos_x-Main.getp2().getTank().getx())<100){
             Main.setRedhel(-15);
         }
         Main.setChanged(1);
@@ -67,7 +67,7 @@ public class Bullet {
     public int impact(Tank t,int ty){
         Texture exp = new Texture("Explosion.png");
         Main.game.batch.draw(exp,t.getx()-50*Main.xm,Main.getgr(),283*Main.xm,122*Main.ym);
-        Main.setRedhel(-1*ty*(22));
+        Main.setRedhel(-1*ty*(30));
         Main.setChanged(1);
         return 0;
     }

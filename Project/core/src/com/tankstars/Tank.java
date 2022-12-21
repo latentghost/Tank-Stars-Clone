@@ -81,12 +81,12 @@ public class Tank {
         return type;
     }
 
-    public void moveleft(int t){
+    public void moveleft(){
         this.setPos_x(this.pos_x - 2);
         this.setPos_y(Main.getgr());
     }
 
-    public void moveright(int t){
+    public void moveright(){
         this.setPos_x(this.pos_x + 2);
         this.setPos_y(Main.getgr());
     }

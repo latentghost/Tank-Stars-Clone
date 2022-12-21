@@ -295,6 +295,10 @@ public class Main extends MainScreen {
             vscom.hover();
             game.batch.draw(vscom.app,x,y,vscom.getWIDTH(),vscom.getHEIGHT());
             if (Gdx.input.isTouched()) {
+                p1 = new Player(0,ChooseTankP1.ind);
+                p1.getTank().setPos_x(151.41f*xm);
+                p1.getTank().setPos_y(gr_h);
+                turn = 0;
                 game.getScreen().dispose();
                 game.resize(1280,720);
                 game.setScreen(new ChooseTankP2(game));
@@ -545,15 +549,25 @@ public class Main extends MainScreen {
         if(redhel>0) {
             p1.setHealth(p1.getHealth() - 1);
             redhel--;
+            if(p1.getHealth()==0){
+                game.getScreen().dispose();
+                game.resize(1280,720);
+                game.setScreen(new MainScreen(game));
+            }
         }
         else {
             p2.setHealth(p2.getHealth() - 1);
             redhel++;
+            if(p2.getHealth()==0){
+                game.getScreen().dispose();
+                game.resize(1280,720);
+                game.setScreen(new MainScreen(game));
+            }
         }
     }
 
     public static void taketurn(int turn){
-        if(turn==1) p1.currturn();
+        if(turn==1 || turn==0) p1.currturn();
         else if(turn==-1) p2.currturn();
     }
 
@@ -572,11 +586,11 @@ public class Main extends MainScreen {
 
         float mx = xm;
         float my = 108.95f*ym;
-        if(turn==1) mx *= p1.getMx();
+        if(turn==1 || turn==0) mx *= p1.getMx();
         else if(turn==-1) mx *= p2.getMx();
 
         int tf = 0;
-        if(turn==1) tf = p1.getFuel();
+        if(turn==1 || turn==0) tf = p1.getFuel();
         else if(turn==-1) tf = p2.getFuel();
 
         game.batch.draw(bg,0,0,1280,720);
@@ -597,10 +611,10 @@ public class Main extends MainScreen {
         game.batch.draw(t2,p2.getTank().getx(),p2.getTank().gety(),p2.getTank().getWIDTH(),p2.getTank().getHEIGHT());
     }
 
-    public static boolean fired(){
+    public static void fired(){
         if(Gdx.input.getX()>1310*xm && Gdx.input.getX()<(1310+227)*xm && Gdx.input.getY()<720-113*ym && Gdx.input.getY()>720-200*ym){
             if(Gdx.input.isTouched()) {
-                if(turn==1){
+                if(turn==1 ){
                     p1.getTank().setBul(new Bullet(p1.getTank().gettype(),p1.getType()));
                     p1.setbul();
                 }
@@ -609,11 +623,8 @@ public class Main extends MainScreen {
                     p2.setbul();
                 }
                 fd = 1;
-                return true;
             }
-            else return false;
         }
-        else return false;
     }
 
     public static void changeturn(){
@@ -627,11 +638,13 @@ public class Main extends MainScreen {
             Thread.currentThread().interrupt();
             game.batch.end();
         }
+        if(p1.getType()==0) turn = 0;
         ct = 0;
     }
 
     public static void shoot(){
-        if(turn==1){
+        fd=1;
+        if(turn==1 || turn==0){
             p1.fire(p2.getTank());
         }
         else if(turn==-1){
@@ -651,7 +664,6 @@ public class Main extends MainScreen {
     public static void pausegame(){
         if(Gdx.input.getX()>1763*xm && Gdx.input.getX()<1847*xm
                 && Gdx.input.getY()<720-906*ym && Gdx.input.getY()>720-990*ym){
-
             if(Gdx.input.isTouched()){
                 paused = 1;
                 pmenu = PauseMenu.getmenu();
