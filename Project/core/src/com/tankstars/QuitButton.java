@@ -23,7 +23,8 @@ public class QuitButton implements Buttons{
     }
 
     @Override
-    public void isClicked(){
-        return;
+    public boolean isClicked(){
+
+        return false;
     }
 }

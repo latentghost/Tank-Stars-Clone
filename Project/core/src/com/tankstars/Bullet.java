@@ -25,7 +25,7 @@ public class Bullet {
         }
         this.pos_x = 0f;
         this.pos_y = 0f;
-        this.vel = 7*Main.xm;
+        this.vel = 10*Main.xm;
         this.dist = 0f;
     }
 
@@ -48,20 +48,26 @@ public class Bullet {
     public void travel(float angle, int mul){
         this.pos_x += mul*vel;
         this.dist += mul*vel;
-        this.pos_y = Main.getgr() + (float) (mul*this.dist*Math.tan(Math.toRadians(angle)) - (0.025f)*(this.dist/this.vel)*(this.dist/this.vel));
-        System.out.println(this.pos_y/Main.xm);
+        this.pos_y = Main.getgr() + 45f*Main.xm + (float) (mul*this.dist*Math.tan(Math.toRadians(angle)) - (0.1f)*(this.dist/this.vel)*(this.dist/this.vel));
     }
 
     public int impact(){
         Texture exp = new Texture("Explosion.png");
-        Main.game.batch.draw(exp,this.pos_x,Main.getgr(),283*Main.xm,122*Main.ym);
+        Main.game.batch.draw(exp,this.pos_x-50*Main.xm,Main.getgr(),283*Main.xm,122*Main.ym);
+        if(Math.abs(this.pos_x-Main.getp1().getTank().getx())<200){
+            Main.setRedhel(15);
+        }
+        else if(Math.abs(this.pos_x-Main.getp2().getTank().getx())<200){
+            Main.setRedhel(-15);
+        }
         Main.setChanged(1);
         return 0;
     }
 
-    public int impact(Tank t){
+    public int impact(Tank t,int ty){
         Texture exp = new Texture("Explosion.png");
         Main.game.batch.draw(exp,t.getx()-50*Main.xm,Main.getgr(),283*Main.xm,122*Main.ym);
+        Main.setRedhel(-1*ty*(22));
         Main.setChanged(1);
         return 0;
     }

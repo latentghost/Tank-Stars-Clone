@@ -18,31 +18,38 @@ public class Main extends MainScreen {
     private static int ct = 0;
     private static int fd = 0;
     private static int changed = 0;
+    private static int redhel = 0;
+    private static int paused = 0;
 
-    private MainScreenButton vscom;
-    private MainScreenButton vsfr;
-    private MainScreenButton load;
-    private MainScreenButton quit;
+    private static MainScreenButton vscom;
+    private static MainScreenButton vsfr;
+    private static MainScreenButton load;
+    private static MainScreenButton quit;
 
-    private PauseMenu pmenu;
-    private SaveMenu smenu;
-    private QuitMenu qmenu;
+    private static PauseMenu pmenu;
+    private static SaveMenu smenu;
+    private static QuitMenu qmenu;
 
 
     public Main(Tankstars game){
         super(game);
-        this.vscom = new MainScreenButton();
-        this.vsfr = new MainScreenButton();
-        this.load = new MainScreenButton();
-        this.quit = new MainScreenButton();
-        this.pmenu = new PauseMenu();
-        this.smenu = new SaveMenu();
-        this.qmenu = new QuitMenu();
+        vscom = new MainScreenButton();
+        vsfr = new MainScreenButton();
+        load = new MainScreenButton();
+        quit = new MainScreenButton();
         this.play();
+    }
+
+    public static void setPaused(int paused) {
+        Main.paused = paused;
     }
 
     public static void setChanged(int changed) {
         Main.changed = changed;
+    }
+
+    public static void setRedhel(int redhel) {
+        Main.redhel = redhel;
     }
 
     public static void setCt(int ct) {
@@ -53,11 +60,11 @@ public class Main extends MainScreen {
         Main.fd = fd;
     }
 
-    public Player getp1() {
+    public static Player getp1() {
         return Main.p1;
     }
 
-    public Player getp2() {
+    public static Player getp2() {
         return Main.p2;
     }
 
@@ -121,7 +128,7 @@ public class Main extends MainScreen {
             quit.hover();
             game.batch.draw(quit.app,x,a,quit.getWIDTH(),quit.getHEIGHT());
             if (Gdx.input.isTouched()) {
-                quitgame();
+                Main.quitgame();
             }
         }
 
@@ -275,23 +282,49 @@ public class Main extends MainScreen {
 
     public static final void arena(){
         game.batch.begin();
+        if(paused==1){
+            game.batch.setColor(1,1,1,0.05f);
+            Main.drawarena(turn);
+            game.batch.setColor(1,1,1,1);
+            Main.drawpause();
+            game.batch.end();
+            return;
+        }
         if(changed==1){
-            try{
-                Thread.sleep(500);
-            }
-            catch(InterruptedException e){
-                ;
-            }
+            Main.waits();
             changed = 0;
         }
-        Main.drawarena((int)turn);
-        if(fd==0) Main.taketurn((int)turn);
+        if(redhel!=0){
+            Main.reduce();
+            Main.drawarena(turn);
+            game.batch.end();
+            return;
+        }
+        Main.drawarena(turn);
+        if(fd==0) Main.taketurn(turn);
+        Main.pausegame();
         Main.fired();
         if(fd==1){
             Main.shoot();
             if(ct==1) Main.changeturn();
         }
         game.batch.end();
+    }
+
+    public static void waits(){
+        try{Thread.sleep(500);}
+        catch(InterruptedException e){;}
+    }
+
+    public static void reduce(){
+        if(redhel>0) {
+            p1.setHealth(p1.getHealth() - 1);
+            redhel--;
+        }
+        else {
+            p2.setHealth(p2.getHealth() - 1);
+            redhel++;
+        }
     }
 
     public static void taketurn(int turn){
@@ -374,16 +407,14 @@ public class Main extends MainScreen {
 
     public static void shoot(){
         if(turn==1){
-            p1.getTank().setAngle(30);
             p1.fire(p2.getTank());
         }
         else if(turn==-1){
-            p2.getTank().setAngle(30);
             p2.fire(p1.getTank());
         }
     }
 
-    public void quitgame(){
+    public static void quitgame(){
         game.getScreen().dispose();
         System.exit(0);
     }
@@ -392,15 +423,46 @@ public class Main extends MainScreen {
 
     }
 
-    public void pausegame(){
+    public static void pausegame(){
+        if(Gdx.input.getX()>1763*xm && Gdx.input.getX()<1847*xm
+                && Gdx.input.getY()<720-906*ym && Gdx.input.getY()>720-990*ym){
+
+            if(Gdx.input.isTouched()){
+                paused = 1;
+                pmenu = new PauseMenu();
+                Main.drawpause();
+            }
+        }
+    }
+
+    public static void drawpause(){
+        Texture pm = new Texture("Pause Menu Back.png");
+        Texture pbut = new Texture("Choose Game Button.png");
+        game.batch.draw(pm,701*Main.xm,158*Main.ym,518*Main.xm,764*Main.ym);
+        game.batch.draw(pbut,pmenu.getRes().getPos_x(),pmenu.getRes().getPos_y(),pmenu.getRes().getWIDTH(),pmenu.getRes().getHEIGHT());
+        game.batch.draw(pbut,pmenu.getRes().getPos_x(),pmenu.getSave().getPos_y(),pmenu.getRes().getWIDTH(),pmenu.getRes().getHEIGHT());
+        game.batch.draw(pbut,pmenu.getRes().getPos_x(),pmenu.getNewg().getPos_y(),pmenu.getRes().getWIDTH(),pmenu.getRes().getHEIGHT());
+        game.batch.draw(pbut,pmenu.getRes().getPos_x(),pmenu.getQuit().getPos_y(),pmenu.getRes().getWIDTH(),pmenu.getRes().getHEIGHT());
+
+        if(pmenu.getRes().isClicked()) pmenu.resume();
+        else if(pmenu.getNewg().isClicked()) pmenu.newgame();
+        else if(pmenu.getSave().isClicked()) pmenu.savestate();
+        else if(pmenu.getQuit().isClicked()) pmenu.quit();
+    }
+
+    public static void savegame(){
 
     }
 
-    public void save(){
+    public static void drawsave(){
+        Texture sm = new Texture("Save Menu Back.png");
+        game.batch.draw(sm,701*Main.xm,203.5f*Main.ym,518*Main.xm,673f*Main.ym);
 
     }
 
-    public void quitToMenu(){
-
+    public static void quitToMenu(){
+        game.getScreen().dispose();
+        game.resize(1280,720);
+        game.setScreen(new MainScreen(game));
     }
 }

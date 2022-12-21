@@ -4,6 +4,6 @@ import com.badlogic.gdx.graphics.Texture;
 public interface Buttons {
 
     void text(String s);
-    void isClicked();
+    boolean isClicked();
 
 }

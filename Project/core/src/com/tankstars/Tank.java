@@ -30,6 +30,7 @@ public class Tank {
             else if(tnk==1) this.img = new Texture("Mark 1 - P2.png");
             else this.img = new Texture("Coalition - P2.png");
         }
+        this.angle = 45;
     }
 
     public void setBul(Bullet bul) {
@@ -99,7 +100,7 @@ public class Tank {
         if((this.getBul().getPos_x()>=target.getx() && this.getBul().getPos_x()<=target.getx()+120*Main.xm)
                 && (this.getBul().getPos_y()<=target.gety()+71*Main.ym && this.getBul().getPos_y()>=target.gety()))
         {
-            Main.setFd(this.getBul().impact(target));
+            Main.setFd(this.getBul().impact(target,ty));
             Main.setCt(1);
         }
         else if(this.getBul().getPos_y()<Main.getgr())
@@ -107,7 +108,6 @@ public class Tank {
             Main.setFd(this.getBul().impact());
             Main.setCt(1);
         }
-//        else if(this.getBul().getPos_y())
     }
 
 }
