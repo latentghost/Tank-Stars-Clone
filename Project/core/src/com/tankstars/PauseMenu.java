@@ -2,25 +2,23 @@ package com.tankstars;
 
 public class PauseMenu extends Menu {
 
-    private LoadScreenButton res;
-    private LoadScreenButton save;
-    private LoadScreenButton newg;
-    private LoadScreenButton quit;
+    private static PauseMenu menu = null;
+    private static LoadScreenButton res;
+    private static LoadScreenButton save;
+    private static LoadScreenButton newg;
+    private static LoadScreenButton quit;
 
 
-    public PauseMenu(){
-        this.res = new LoadScreenButton();
-        this.save = new LoadScreenButton();
-        this.newg = new LoadScreenButton();
-        this.quit = new LoadScreenButton();
-        this.getRes().setPos_x(834*Main.xm);
-        this.getNewg().setPos_x(834*Main.xm);
-        this.getQuit().setPos_x(834*Main.xm);
-        this.getSave().setPos_x(834*Main.xm);
-        this.getRes().setPos_y(615.83f*Main.ym);
-        this.getSave().setPos_y(495.83f*Main.ym);
-        this.getNewg().setPos_y(375.83f*Main.ym);
-        this.getQuit().setPos_y(255.83f*Main.ym);
+    private PauseMenu(){
+        res = new LoadScreenButton(834*Main.xm,615.83f*Main.ym);
+        save = new LoadScreenButton(834*Main.xm,495.83f*Main.ym);
+        newg = new LoadScreenButton(834*Main.xm,375.83f*Main.ym);
+        quit = new LoadScreenButton(834*Main.xm,255.83f*Main.ym);
+    }
+
+    public static PauseMenu getmenu(){
+        if(menu==null) return new PauseMenu();
+        else return menu;
     }
 
     public LoadScreenButton getRes() {
@@ -44,7 +42,7 @@ public class PauseMenu extends Menu {
     }
 
     public void savestate(){
-
+        Main.savegame();
     }
 
     public void newgame(){

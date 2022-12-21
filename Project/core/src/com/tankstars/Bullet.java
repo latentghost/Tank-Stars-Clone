@@ -9,7 +9,7 @@ public class Bullet {
     private float vel;
     private float dist;
 
-    protected Texture img;
+    transient protected Texture img;
 
 
     public Bullet(int type,int p){

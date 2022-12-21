@@ -1,5 +1,6 @@
 package com.tankstars;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
 public class MainScreenButton implements Buttons {
@@ -11,6 +12,12 @@ public class MainScreenButton implements Buttons {
 
     private float pos_x;
     private float pos_y;
+
+    public MainScreenButton(float x, float y){
+        this.pos_x = x;
+        this.pos_y = y;
+        app = new Texture("Normal Button.png");
+    }
 
     public float getWIDTH() {
         return WIDTH;
@@ -36,7 +43,11 @@ public class MainScreenButton implements Buttons {
 
     @Override
     public boolean isClicked(){
-        return false;
+        if(Gdx.input.getX()>this.pos_x && Gdx.input.getX()<this.pos_x+this.WIDTH
+                && Gdx.input.getY()<720-this.pos_y && Gdx.input.getY()>720-(this.pos_y+this.HEIGHT)){
+            return true;
+        }
+        else return false;
     }
 
     public void norm(){

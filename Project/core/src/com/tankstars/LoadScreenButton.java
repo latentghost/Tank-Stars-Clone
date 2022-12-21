@@ -10,6 +10,12 @@ public class LoadScreenButton implements Buttons {
     private float pos_x;
     private float pos_y;
 
+
+    public LoadScreenButton(float x, float y){
+        this.pos_x = x;
+        this.pos_y = y;
+    }
+
     public float getWIDTH() {
         return WIDTH;
     }

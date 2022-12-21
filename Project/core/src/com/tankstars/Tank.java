@@ -6,7 +6,7 @@ import com.badlogic.gdx.utils.Null;
 public class Tank {
     private int type;
     private Bullet bul;
-    protected Texture img;
+    transient protected Texture img;
 
     private final float WIDTH = 131f/1920*1280;
     private final float HEIGHT = 76f/1080*720;

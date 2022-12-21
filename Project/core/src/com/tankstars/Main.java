@@ -20,11 +20,16 @@ public class Main extends MainScreen {
     private static int changed = 0;
     private static int redhel = 0;
     private static int paused = 0;
+    private static int saving = 0;
 
     private static MainScreenButton vscom;
     private static MainScreenButton vsfr;
     private static MainScreenButton load;
     private static MainScreenButton quit;
+
+    private static MainScreenButton l1;
+    private static MainScreenButton l2;
+    private static MainScreenButton l3;
 
     private static PauseMenu pmenu;
     private static SaveMenu smenu;
@@ -33,11 +38,18 @@ public class Main extends MainScreen {
 
     public Main(Tankstars game){
         super(game);
-        vscom = new MainScreenButton();
-        vsfr = new MainScreenButton();
-        load = new MainScreenButton();
-        quit = new MainScreenButton();
+        vscom = new MainScreenButton(1468f*xm,746f*ym);
+        vsfr = new MainScreenButton(1468f*xm,400f*ym);
+        load = new MainScreenButton(1468f*xm,227f*ym);
+        quit = new MainScreenButton(1468f*xm,573f*ym);
+        l1 = new MainScreenButton(1468f*xm,400f*ym);
+        l2 = new MainScreenButton(1468f*xm,227f*ym);
+        l3 = new MainScreenButton(1468f*xm,573f*ym);
         this.play();
+    }
+
+    public static void setSaving(int saving) {
+        Main.saving = saving;
     }
 
     public static void setPaused(int paused) {
@@ -73,6 +85,61 @@ public class Main extends MainScreen {
     }
 
 
+    public static void loadgame(){
+        game.batch.begin();
+        game.batch.draw(img,0,0,1280,720);
+
+        float x = 1468f*xm;
+        float b = 573f*ym;
+        float z = 400f*ym;
+        float a = 227f*ym;
+
+        game.batch.draw(l1.app,x,z,l1.getWIDTH(),l1.getHEIGHT());
+        game.batch.draw(l2.app,x,a,l2.getWIDTH(),l2.getHEIGHT());
+        game.batch.draw(l3.app,x,b,l3.getWIDTH(),l3.getHEIGHT());
+
+        if (l1.isClicked()) {
+            l1.hover();
+            game.batch.draw(l1.app,x,b,l1.getWIDTH(),l1.getHEIGHT());
+            if (Gdx.input.isTouched()) {
+                game.getScreen().dispose();
+                game.resize(1280,720);
+                game.setScreen(new ChooseTankP1(game));
+            }
+        }
+
+        else if (l2.isClicked()){
+            l2.hover();
+            game.batch.draw(l2.app,x,z,l2.getWIDTH(),l2.getHEIGHT());
+            if (Gdx.input.isTouched()) {
+                game.getScreen().dispose();
+                game.resize(1280,720);
+                game.setScreen(new LoadGame(game));
+            }
+        }
+
+        else if(l3.isClicked()){
+            l3.hover();
+            game.batch.draw(l3.app,x,a,l3.getWIDTH(),l3.getHEIGHT());
+            if (Gdx.input.isTouched()) {
+                Main.quitgame();
+            }
+        }
+
+        else{
+            l1.norm();
+            l2.norm();
+            l3.norm();
+            game.batch.draw(l1.app,x,b,l1.getWIDTH(),l1.getHEIGHT());
+            game.batch.draw(l2.app,x,z,l2.getWIDTH(),l2.getHEIGHT());
+            game.batch.draw(l3.app,x,a,l3.getWIDTH(),l3.getHEIGHT());
+        }
+
+
+
+        game.batch.end();
+    }
+
     public void play(){
         game.batch.begin();
 
@@ -94,7 +161,7 @@ public class Main extends MainScreen {
         game.batch.draw(load.app,x,a,load.getWIDTH(),load.getHEIGHT());
         game.batch.draw(quit.app,x,b,quit.getWIDTH(),quit.getHEIGHT());
 
-        if (((Gdx.input.getX() > x && Gdx.input.getX() < (x + vscom.getWIDTH())) && (Gdx.input.getY() < 720-y && Gdx.input.getY() > (720-y - vscom.getHEIGHT()) ) )) {
+        if (vscom.isClicked()) {
             vscom.hover();
             game.batch.draw(vscom.app,x,y,vscom.getWIDTH(),vscom.getHEIGHT());
             if (Gdx.input.isTouched()) {
@@ -104,7 +171,7 @@ public class Main extends MainScreen {
             }
         }
 
-        else if (( (Gdx.input.getX() > x && Gdx.input.getX() < (x + vscom.getWIDTH()) ) && (Gdx.input.getY() < 720-b && Gdx.input.getY() > (720-b - vscom.getHEIGHT()) ) )) {
+        else if (vsfr.isClicked()) {
             vsfr.hover();
             game.batch.draw(vsfr.app,x,b,vsfr.getWIDTH(),vsfr.getHEIGHT());
             if (Gdx.input.isTouched()) {
@@ -114,17 +181,17 @@ public class Main extends MainScreen {
             }
         }
 
-        else if ( (Gdx.input.getX() > x && Gdx.input.getX() < (x + vscom.getWIDTH()) ) && (Gdx.input.getY() < 720-z && Gdx.input.getY() > (720-z - vscom.getHEIGHT()) )) {
+        else if (load.isClicked()){
             load.hover();
             game.batch.draw(load.app,x,z,load.getWIDTH(),load.getHEIGHT());
             if (Gdx.input.isTouched()) {
                 this.dispose();
                 game.resize(1280,720);
-//                game.setScreen(new LoadGame(game));
+                game.setScreen(new LoadGame(game));
             }
         }
 
-        else if( (Gdx.input.getX() > x && Gdx.input.getX() < (x + vscom.getWIDTH()) ) && (Gdx.input.getY() < 720-a && Gdx.input.getY() > (720-a - vscom.getHEIGHT()) )){
+        else if(quit.isClicked()){
             quit.hover();
             game.batch.draw(quit.app,x,a,quit.getWIDTH(),quit.getHEIGHT());
             if (Gdx.input.isTouched()) {
@@ -141,6 +208,20 @@ public class Main extends MainScreen {
             game.batch.draw(vsfr.app,x,b,vsfr.getWIDTH(),vsfr.getHEIGHT());
             game.batch.draw(load.app,x,z,load.getWIDTH(),load.getHEIGHT());
             game.batch.draw(quit.app,x,a,quit.getWIDTH(),quit.getHEIGHT());
+        }
+
+        float bx = 1386f*xm;
+        float by = 979f*ym;
+        float bw = 69f/1920*1080;
+        Texture back = new Texture("Back Button.png");
+        game.batch.draw(back,bx,by,bw,bw);
+
+        if(Gdx.input.getX()>bx && Gdx.input.getX()<bx+bw && Gdx.input.getY()<720-by && Gdx.input.getY()>(720-by-bw)){
+            if(Gdx.input.isTouched()) {
+                game.getScreen().dispose();
+                game.resize(1280, 720);
+                game.setScreen(new MainScreen(game));
+            }
         }
 
         game.batch.end();
@@ -282,6 +363,14 @@ public class Main extends MainScreen {
 
     public static final void arena(){
         game.batch.begin();
+        if(saving==1){
+            game.batch.setColor(1,1,1,0.05f);
+            Main.drawarena(turn);
+            game.batch.setColor(1,1,1,1);
+            Main.drawsave();
+            game.batch.end();
+            return;
+        }
         if(paused==1){
             game.batch.setColor(1,1,1,0.05f);
             Main.drawarena(turn);
@@ -429,7 +518,7 @@ public class Main extends MainScreen {
 
             if(Gdx.input.isTouched()){
                 paused = 1;
-                pmenu = new PauseMenu();
+                pmenu = PauseMenu.getmenu();
                 Main.drawpause();
             }
         }
@@ -451,13 +540,23 @@ public class Main extends MainScreen {
     }
 
     public static void savegame(){
-
+        smenu = SaveMenu.getmenu();
+        saving = 1;
     }
 
     public static void drawsave(){
         Texture sm = new Texture("Save Menu Back.png");
+        Texture pbut = new Texture("Choose Game Button.png");
         game.batch.draw(sm,701*Main.xm,203.5f*Main.ym,518*Main.xm,673f*Main.ym);
+        game.batch.draw(pbut,pmenu.getRes().getPos_x(),pmenu.getRes().getPos_y(),pmenu.getRes().getWIDTH(),pmenu.getRes().getHEIGHT());
+        game.batch.draw(pbut,pmenu.getRes().getPos_x(),pmenu.getSave().getPos_y(),pmenu.getRes().getWIDTH(),pmenu.getRes().getHEIGHT());
+        game.batch.draw(pbut,pmenu.getRes().getPos_x(),pmenu.getNewg().getPos_y(),pmenu.getRes().getWIDTH(),pmenu.getRes().getHEIGHT());
+        game.batch.draw(pbut,pmenu.getRes().getPos_x(),pmenu.getQuit().getPos_y(),pmenu.getRes().getWIDTH(),pmenu.getRes().getHEIGHT());
 
+        if(smenu.getG1().isClicked()) smenu.save(1);
+        else if(smenu.getG2().isClicked()) smenu.save(2);
+        else if(smenu.getG3().isClicked()) smenu.save(3);
+        else if(smenu.getGx().isClicked()) smenu.cancel();
     }
 
     public static void quitToMenu(){
