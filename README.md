@@ -9,7 +9,7 @@ It also features close-to-real-life physics that tries to accurately simulate th
 Repository Description
 ----
 [Project](https://github.com/latentghost/AP_Project/tree/main/Project) folder contains all the relevant code files. Run [Main.java](https://github.com/latentghost/AP_Project/blob/main/Project/core/src/com/tankstars/Main.java) to start the game.  
-[assets](https://github.com/latentghost/AP_Project/tree/main/Project/assets) folder contains all the images and vectors used to build the visuals.
+[Project/assets/](https://github.com/latentghost/AP_Project/tree/main/Project/assets) folder contains all the images and vectors used to build the visuals.
 Ignore Gradle build files.  
 
 [Non-Project](https://github.com/latentghost/AP_Project/tree/main/Non_Project) folder shows the UML diagrams for the workflow of the game.  
