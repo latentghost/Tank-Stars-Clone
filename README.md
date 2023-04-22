@@ -13,4 +13,4 @@ Repository Description
 Ignore Gradle build files.  
 
 [Non-Project](https://github.com/latentghost/AP_Project/tree/main/Non_Project) folder shows the UML diagrams for the workflow of the game.  
-It also has a gameplay recording that walks through how to play the game after running [Main.java](https://github.com/latentghost/AP_Project/blob/main/Project/core/src/com/tankstars/Main.java).
+It also has a [gameplay recording](https://github.com/latentghost/AP_Project/blob/main/Non_Project/game_recording.mov.zip) that walks through how to play the game after running [Main.java](https://github.com/latentghost/AP_Project/blob/main/Project/core/src/com/tankstars/Main.java).
