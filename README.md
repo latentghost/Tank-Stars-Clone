@@ -17,4 +17,4 @@ The [Project/assets/](https://github.com/latentghost/AP_Project/tree/main/Projec
 ### Non-Project Folder
 The [Non-Project](https://github.com/latentghost/AP_Project/tree/main/Non_Project) folder showcases the UML diagrams that demonstrate the workflow of the game. It provides insights into the architecture and design of the game.
 
-🎥 Additionally, you can find a [gameplay recording](https://github.com/latentghost/AP_Project/blob/main/Non_Project/game_recording.mov.zip) in this folder. This recording walks you through how to play the game after running [Main.java](https://github.com/latentghost/AP_Project/blob/main/Project/core/src/com/tankstars/Main.java). It's a great resource to understand the gameplay mechanics and strategies.
+Additionally, you can find a [gameplay recording](https://github.com/latentghost/AP_Project/blob/main/Non_Project/game_recording.mov.zip) in this folder. This recording walks you through how to play the game after running [Main.java](https://github.com/latentghost/AP_Project/blob/main/Project/core/src/com/tankstars/Main.java). It's a great resource to understand the gameplay mechanics and strategies.
