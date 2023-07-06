@@ -2,8 +2,6 @@
 
 
 
-GUI Figma Link:
-https://www.figma.com/file/YIu9fM9MWcfaLQ9mS6beDv/AP_Project?node-id=0%3A1&t=8kasb98TPSZYCVJ1-1
+[GUI](https://www.figma.com/file/YIu9fM9MWcfaLQ9mS6beDv/AP_Project?node-id=0%3A1&t=8kasb98TPSZYCVJ1-1) on Figma
 
-Github link:
-https://github.com/latentghost/AP_Project.git
+[Video Demo](https://drive.google.com/file/d/1YCRprpJn9CB6_rxYwGlsvSNtGTYYtVLG/view?usp=sharing) of the gameplay shows how to navigate and use each section of the game.
