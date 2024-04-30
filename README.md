@@ -1,4 +1,4 @@
-## AP Project
+## Tank Stars Clone
 
 Project Description
 ----
